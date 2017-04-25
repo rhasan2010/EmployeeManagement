@@ -5,108 +5,66 @@
  */
 package com.assignment.employeemanagement.controller;
 
-import com.assignment.employeemanagement.entity.EmployeePersistence;
-import com.assignment.employeemanagement.model.Employee;
-import java.util.List;
+import com.assignment.employeemanagement.services.EmployeeService;
+import org.glassfish.jersey.server.ResourceConfig;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import static org.mockito.Mockito.*;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 /**
  *
  * @author Uzzal
  */
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:META-INF/applicationContext-test.xml"})
 @ActiveProfiles("unit-test")
 @WebAppConfiguration
-public class AppControllerTest {
-    
+public class AppControllerTest extends JerseySpringTest {
+
+    @Autowired
+    EmployeeService employeeService;
+    private MockMvc mockMvc;
+
     public AppControllerTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
+        reset(employeeService);
+        mockMvc = MockMvcBuilders.standaloneSetup(new AppController()).build();
     }
-    
+
+    @Test
+    public void justAtest() {
+        Assert.assertEquals(2, 2);
+    }
+
     @After
     public void tearDown() {
     }
 
-    /**
-     * Test of requestToGetJSONDataFromServer method, of class AppController.
-     */
-//    @Test
-//    public void testRequestToGetJSONDataFromServer() throws Exception {
-//        System.out.println("requestToGetJSONDataFromServer");
-//        AppController instance = new AppController();
-//        List<Employee> expResult = null;
-//        List<Employee> result = instance.requestToGetJSONDataFromServer();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-
-    /**
-     * Test of saveEmployee method, of class AppController.
-     */
-//    @Test
-//    public void testSaveEmployee() {
-//        System.out.println("saveEmployee");
-//        Employee employee = null;
-//        AppController instance = new AppController();
-//        ResponseEntity<Employee> expResult = null;
-//        ResponseEntity<Employee> result = instance.saveEmployee(employee);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-
-    /**
-     * Test of getEmployeesList method, of class AppController.
-     */
-//    @Test
-//    public void testGetEmployeesList() {
-//        System.out.println("getEmployeesList");
-//        AppController instance = new AppController();
-//        ResponseEntity<List<EmployeePersistence>> expResult = null;
-//        ResponseEntity<List<EmployeePersistence>> result = instance.getEmployeesList();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-
-    /**
-     * Test of deleteEmployee method, of class AppController.
-     */
-//    @Test
-//    public void testDeleteEmployee() {
-//        System.out.println("deleteEmployee");
-//        Long employeeId = null;
-//        AppController instance = new AppController();
-//        ResponseEntity<EmployeePersistence> expResult = null;
-//        ResponseEntity<EmployeePersistence> result = instance.deleteEmployee(employeeId);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-    
+    @Override
+    protected ResourceConfig configure() {
+        return new ResourceConfig(AppController.class);
+    }
 }

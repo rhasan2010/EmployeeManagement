@@ -14,14 +14,14 @@
     <import resource="classpath:META-INF/database-context.xml" />
     <context:component-scan base-package="com.assignment.employeemanagement.controller"/>
     <context:component-scan base-package="com.assignment.employeemanagement.repository"/>
-    
+    <context:annotation-config/>
     <bean id="validatorFactory" class="javax.validation.Validation"
           factory-method="buildDefaultValidatorFactory" />
     <bean id="validator" factory-bean="validatorFactory"
                 factory-method="getValidator" />
     
-     <bean id="employeeRepo" name="employeeRepo" class="org.mockito.Mockito" factory-method="mock">
-        <constructor-arg value="com.assignment.employeemanagement.repository"/>
+     <bean id="employeeService" name="employeeService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.assignment.employeemanagement.services.EmployeeServiceImpl"/>
     </bean>
 
 </beans>
