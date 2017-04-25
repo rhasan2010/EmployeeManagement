@@ -11,7 +11,7 @@ nb-configuration.xml
 .springBeans
 
 ### NetBeans ###
-nbproject/private/
+nbproject/
 build/
 nbbuild/
 dist/
